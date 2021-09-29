@@ -35,7 +35,11 @@ Does backup pick up tables in other regions?
 
 ## Action Plan
 
-- [ ] Initialize the cdk application (can this be done without a sub directory??)
+- [x] Initialize the cdk application
+  - [x] Do a basic app first, validate, then delete it
+    - `cdk init app --language typescript`
+  - [x] can this be done without a sub directory? NOPE
+    - `cdk init cannot be run in a non-empty directory!`
 - [ ] Validate correct installation of the cdk application
 - [ ] Configure stack with account number and region, for now
 - [ ] Create 3 tables with CDK
