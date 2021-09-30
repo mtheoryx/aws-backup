@@ -3,8 +3,19 @@ import "source-map-support/register";
 import * as cdk from "@aws-cdk/core";
 import { DynamoTablesStack } from "../lib/dynamo-tables-stack";
 import { DynamoBackupTablesStack } from "../lib/dynamo-backup-tables-stack";
+import { AWSBackupStack } from "../lib/aws-backup-stack";
 
 const app = new cdk.App();
+
+// AWS Backup stack
+const backupStack = new AWSBackupStack(app, "AWSBackupStack", {
+  env: { account: "716374413161", region: "us-east-2" },
+  tags: {
+    environment: "primary",
+    duration: "temporary",
+    cdk: "true",
+  },
+});
 
 // No backup Tables
 const disposableStack = new DynamoTablesStack(app, "DynamoTablesStack", {

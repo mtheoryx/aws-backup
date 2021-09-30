@@ -8,7 +8,7 @@ The solution should be deployable to multiple environments via an ADO pipeline.
 
 In this case, the environments are separate AWS accounts.
 
-The primary region is us-east-2. The backup region is us-west-2.
+The primary region is us-east-2. The backup region is us-west-1.
 
 ### Initial assumptions
 
@@ -46,15 +46,19 @@ Does backup pick up tables in other regions?
 - [x] Deploy the stack, validating correct account, profile configuration
 - [x] Add backup tags to 2 tables, but omit from 1 table. Tag: {"backup": "4HourRPO"}
 - [x] Deploy and validate tag application
-- [ ] Plan the backup plan iterations (creation, validation, externalizing variables)
+- [x] Plan the backup plan iterations (creation, validation, externalizing variables)
 
 ## AWS Backup Action Plan
 
-- Create isolated stack for backup plan
-- Install aws-backup package
-- Create backup vault, set policy to DESTROY (cdk sets it to RETAIN, which is different than other resources)
-- Create the backup plan selection
-- Create the resource selection, based on tags (4HourRPO)
-- Adjust the schedule for 4 hours
-- Adjust the retention for 90 days
-- Add a move to cold storage after 30 days
+- [x] Create isolated stack for backup plan
+- [x] Install aws-backup package
+- [x] Create backup vault, set policy to DESTROY (cdk sets it to RETAIN, which is different than other resources)
+- [ ] Create the backup plan selection
+- [ ] Create the resource selection, based on tags (4HourRPO)
+- [ ] Adjust the schedule for 4 hours
+- [ ] Adjust the retention for 90 days
+- [ ] Add a move to cold storage after 30 days
+
+## Assumptions challenged
+
+DynamoDB is not supported for cross-region backup!!
