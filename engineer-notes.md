@@ -53,11 +53,10 @@ Does backup pick up tables in other regions?
 - [x] Create isolated stack for backup plan
 - [x] Install aws-backup package
 - [x] Create backup vault, set policy to DESTROY (cdk sets it to RETAIN, which is different than other resources)
-- [ ] Create the backup plan selection
-- [ ] Create the resource selection, based on tags (4HourRPO)
-- [ ] Adjust the schedule for 4 hours
-- [ ] Adjust the retention for 90 days
-- [ ] Add a move to cold storage after 30 days
+- [x] Create the backup plan selection
+- [x] Create the resource selection, based on tags (4HourRPO)
+- [x] Adjust the schedule for 4 hours
+- [x] Adjust the retention for 90 days
 
 ## Assumptions challenged
 

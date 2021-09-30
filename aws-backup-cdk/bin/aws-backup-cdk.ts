@@ -4,14 +4,27 @@ import * as cdk from "@aws-cdk/core";
 import { DynamoTablesStack } from "../lib/dynamo-tables-stack";
 import { DynamoBackupTablesStack } from "../lib/dynamo-backup-tables-stack";
 import { AWSBackupStack } from "../lib/aws-backup-stack";
+import * as dotenv from "dotenv";
+
+// Environment Configuration
+if (process.env.ENV === "DEV") {
+  dotenv.config();
+}
+
+const env = {
+  account: `${process.env.ACCOUNT}`,
+  region: `${process.env.REGION}`,
+};
+
+const environment = process.env.ENVIRONMENT;
 
 const app = new cdk.App();
 
 // AWS Backup stack
 const backupStack = new AWSBackupStack(app, "AWSBackupStack", {
-  env: { account: "716374413161", region: "us-east-2" },
+  env,
   tags: {
-    environment: "primary",
+    environment: `${environment}`,
     duration: "temporary",
     cdk: "true",
   },
@@ -19,16 +32,12 @@ const backupStack = new AWSBackupStack(app, "AWSBackupStack", {
 
 // No backup Tables
 const disposableStack = new DynamoTablesStack(app, "DynamoTablesStack", {
-  env: { account: "716374413161", region: "us-east-2" },
+  env,
   tags: {
-    environment: "primary",
+    environment: `${environment}`,
     duration: "temporary",
     cdk: "true",
   },
-});
-
-cdk.Tags.of(disposableStack).add("backup", "false", {
-  includeResourceTypes: ["AWS::DynamoDB::Table"],
 });
 
 // Backup tables
@@ -36,15 +45,11 @@ const retentionStack = new DynamoBackupTablesStack(
   app,
   "DynamoBackupTablesStack",
   {
-    env: { account: "716374413161", region: "us-east-2" },
+    env,
     tags: {
-      environment: "primary",
+      environment: `${environment}`,
       duration: "temporary",
       cdk: "true",
     },
   }
 );
-
-cdk.Tags.of(retentionStack).add("backup", "4HourRPO", {
-  includeResourceTypes: ["AWS::DynamoDB::Table"],
-});

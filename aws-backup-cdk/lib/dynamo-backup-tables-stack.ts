@@ -7,6 +7,9 @@ export class DynamoBackupTablesStack extends cdk.Stack {
 
     const userTable = new dynamodb.Table(this, "Users", {
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
+      encryption: dynamodb.TableEncryption.AWS_MANAGED,
     });
+
+    cdk.Tags.of(userTable).add("backup", "4HourRPO");
   }
 }

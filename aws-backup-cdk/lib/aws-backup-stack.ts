@@ -19,6 +19,8 @@ export class AWSBackupStack extends cdk.Stack {
       }),
       ruleName: "Backup every 4 hours",
       deleteAfter: cdk.Duration.days(90),
+      startWindow: cdk.Duration.hours(1),
+      completionWindow: cdk.Duration.hours(2),
     });
 
     // Backup plan
@@ -35,6 +37,8 @@ export class AWSBackupStack extends cdk.Stack {
       {
         backupPlan: plan,
         resources: [backup.BackupResource.fromTag("backup", "4HourRPO")],
+        allowRestores: true,
+        backupSelectionName: "DynamoDB 4 hour RPO Targets",
       }
     );
   }
