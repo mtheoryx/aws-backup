@@ -33,17 +33,28 @@ The primary region is us-east-2. The backup region is us-west-2.
 If a table is deleted, how does this affect the backup?
 Does backup pick up tables in other regions?
 
-## Action Plan
+## DynamoDB Action Plan
 
 - [x] Initialize the cdk application
   - [x] Do a basic app first, validate, then delete it
     - `cdk init app --language typescript`
   - [x] can this be done without a sub directory? NOPE
     - `cdk init cannot be run in a non-empty directory!`
-- [ ] Validate correct installation of the cdk application
-- [ ] Configure stack with account number and region, for now
-- [ ] Create 3 tables with CDK
-- [ ] Deploy the stack, validating correct account, profile configuration
-- [ ] Add backup tags to 2 tables, but omit from 1 table. Tag: "4HourRPO"
-- [ ] Deploy and validate tag application
+- [x] Validate correct installation of the cdk application
+- [x] Configure stack with account number and region, for now
+- [x] Create 3 tables with CDK
+- [x] Deploy the stack, validating correct account, profile configuration
+- [x] Add backup tags to 2 tables, but omit from 1 table. Tag: {"backup": "4HourRPO"}
+- [x] Deploy and validate tag application
 - [ ] Plan the backup plan iterations (creation, validation, externalizing variables)
+
+## AWS Backup Action Plan
+
+- Create isolated stack for backup plan
+- Install aws-backup package
+- Create backup vault, set policy to DESTROY (cdk sets it to RETAIN, which is different than other resources)
+- Create the backup plan selection
+- Create the resource selection, based on tags (4HourRPO)
+- Adjust the schedule for 4 hours
+- Adjust the retention for 90 days
+- Add a move to cold storage after 30 days
