@@ -44,7 +44,7 @@ The primary region is us-east-2. The backup region is us-west-1.
     - `cdk init cannot be run in a non-empty directory!`
 - [x] Validate correct installation of the cdk application
 - [x] Configure stack with account number and region, for now
-- [x] Create 3 tables with CDK
+- [x] Create 2 tables with CDK
 - [x] Deploy the stack, validating correct account, profile configuration
 - [x] Add backup tags to 2 tables, but omit from 1 table. Tag: {"backup": "4HourRPO"}
 - [x] Deploy and validate tag application
@@ -52,6 +52,7 @@ The primary region is us-east-2. The backup region is us-west-1.
 - [x] Verify encryption
 - [x] Enable PITR (point in time recovery)
 - [x] Consolidate dynamo stacks
+- [x] Create a 2nd non-backup table to test plan selection
 - [ ] Create a 2nd backup table to test table deletion
 - [ ] Create a 3rd backup table to test LSI backup
 - [ ] Create a 4th backup table to test GSI backup
@@ -69,11 +70,9 @@ The primary region is us-east-2. The backup region is us-west-1.
 - [ ] Test backing up LSI indexes
 - [ ] Test backing up global secondary indexes
 - [ ] Test deleting a table
-- [ ] Recovery point tags?
 
 ## Assumptions challenged
 
-DynamoDB is not supported for cross-region backup!!
-Can only change the billing mode once per 24 hours!
-
-- It's best to configure this up front, changes get weird with this restriction
+- DynamoDB is not supported for cross-region backup!!
+- Can only change the billing mode once per 24 hours!
+  - It's best to configure this up front, changes get weird with this restriction

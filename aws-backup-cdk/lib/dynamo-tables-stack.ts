@@ -26,6 +26,19 @@ export class DynamoTablesStack extends cdk.Stack {
     cdk.Tags.of(userTable).add("backup", "4HourRPO");
     cdk.Tags.of(userTable).add("retention", "90");
 
+    // 2nd non-backed up table to test selection
+
+    const notificationsTable = new dynamodb.Table(this, "Notifications", {
+      partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
+      encryption: dynamodb.TableEncryption.AWS_MANAGED,
+      pointInTimeRecovery: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST
+    });
+
+    cdk.Tags.of(eventsTable).add("backup", "false");
+    cdk.Tags.of(eventsTable).add("retention", "0");
+
     // @TODO: Backed-up table for later deletion test
 
     // @TODO: Table with a local secondary index
