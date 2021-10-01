@@ -30,8 +30,10 @@ The primary region is us-east-2. The backup region is us-west-1.
 
 ### Initial Unknowns
 
-If a table is deleted, how does this affect the backup?
-Does backup pick up tables in other regions?
+- If a table is deleted, how does this affect the backup?
+
+- Does backup pick up tables in other regions?
+  - NO
 
 ## DynamoDB Action Plan
 
@@ -47,6 +49,13 @@ Does backup pick up tables in other regions?
 - [x] Add backup tags to 2 tables, but omit from 1 table. Tag: {"backup": "4HourRPO"}
 - [x] Deploy and validate tag application
 - [x] Plan the backup plan iterations (creation, validation, externalizing variables)
+- [x] Verify encryption
+- [x] Enable PITR (point in time recovery)
+- [x] Consolidate dynamo stacks
+- [ ] Create a 2nd backup table to test table deletion
+- [ ] Create a 3rd backup table to test LSI backup
+- [ ] Create a 4th backup table to test GSI backup
+- [ ] Enable On-demand pricing mode
 
 ## AWS Backup Action Plan
 
@@ -57,7 +66,14 @@ Does backup pick up tables in other regions?
 - [x] Create the resource selection, based on tags (4HourRPO)
 - [x] Adjust the schedule for 4 hours
 - [x] Adjust the retention for 90 days
+- [ ] Test backing up LSI indexes
+- [ ] Test backing up global secondary indexes
+- [ ] Test deleting a table
+- [ ] Recovery point tags?
 
 ## Assumptions challenged
 
 DynamoDB is not supported for cross-region backup!!
+Can only change the billing mode once per 24 hours!
+
+- It's best to configure this up front, changes get weird with this restriction

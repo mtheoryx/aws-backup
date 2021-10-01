@@ -2,7 +2,6 @@
 import "source-map-support/register";
 import * as cdk from "@aws-cdk/core";
 import { DynamoTablesStack } from "../lib/dynamo-tables-stack";
-import { DynamoBackupTablesStack } from "../lib/dynamo-backup-tables-stack";
 import { AWSBackupStack } from "../lib/aws-backup-stack";
 import * as dotenv from "dotenv";
 
@@ -30,8 +29,8 @@ const backupStack = new AWSBackupStack(app, "AWSBackupStack", {
   },
 });
 
-// No backup Tables
-const disposableStack = new DynamoTablesStack(app, "DynamoTablesStack", {
+// DynamoDB Stack
+const dynamoDbStack = new DynamoTablesStack(app, "DynamoTablesStack", {
   env,
   tags: {
     environment: `${environment}`,
@@ -39,17 +38,3 @@ const disposableStack = new DynamoTablesStack(app, "DynamoTablesStack", {
     cdk: "true",
   },
 });
-
-// Backup tables
-const retentionStack = new DynamoBackupTablesStack(
-  app,
-  "DynamoBackupTablesStack",
-  {
-    env,
-    tags: {
-      environment: `${environment}`,
-      duration: "temporary",
-      cdk: "true",
-    },
-  }
-);
