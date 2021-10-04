@@ -53,10 +53,10 @@ The primary region is us-east-2. The backup region is us-west-1.
 - [x] Enable PITR (point in time recovery)
 - [x] Consolidate dynamo stacks
 - [x] Create a 2nd non-backup table to test plan selection
-- [ ] Create a 2nd backup table to test table deletion
-- [ ] Create a 3rd backup table to test LSI backup
-- [ ] Create a 4th backup table to test GSI backup
-- [ ] Enable On-demand pricing mode
+- [x] Create a 2nd backup table to test table deletion
+- [x] Enable On-demand pricing mode for all tables
+- [x] Create a 3rd backup table to test LSI backup https://bobbyhadz.com/blog/aws-cdk-dynamodb-table
+- [x] Create a 4th backup table to test GSI backup https://bobbyhadz.com/blog/aws-cdk-add-global-secondary-index-dynamodb
 
 ## AWS Backup Action Plan
 
@@ -70,9 +70,11 @@ The primary region is us-east-2. The backup region is us-west-1.
 - [ ] Test backing up LSI indexes
 - [ ] Test backing up global secondary indexes
 - [ ] Test deleting a table
+- [ ] Write a few basic tests for the backup stack
 
 ## Assumptions challenged
 
 - DynamoDB is not supported for cross-region backup!!
 - Can only change the billing mode once per 24 hours!
   - It's best to configure this up front, changes get weird with this restriction
+- Can only update 1 GSI per table at a time, and they take time to create and become active
