@@ -67,10 +67,6 @@ The primary region is us-east-2. The backup region is us-west-1.
 - [x] Create the resource selection, based on tags (4HourRPO)
 - [x] Adjust the schedule for 4 hours
 - [x] Adjust the retention for 90 days
-- [ ] Test backing up LSI indexes
-- [ ] Test backing up global secondary indexes
-- [ ] Test deleting a table
-- [ ] Write a few basic tests for the backup stack
 
 ## Assumptions challenged
 
