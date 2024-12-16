@@ -17,8 +17,8 @@ export class AWSBackupStack extends cdk.Stack {
         minute: "0",
         hour: "0/4",
       }),
-      ruleName: "Backup every 4 hours",
-      deleteAfter: cdk.Duration.days(90),
+      ruleName: "Backup4hours",
+      deleteAfter: cdk.Duration.days(1),
       startWindow: cdk.Duration.hours(1),
       completionWindow: cdk.Duration.hours(2),
     });
@@ -27,7 +27,7 @@ export class AWSBackupStack extends cdk.Stack {
     const plan = new backup.BackupPlan(this, "DynamoBackupPlan", {
       backupVault: vault,
       backupPlanRules: [dynamoRule],
-      backupPlanName: "Dynamo 4 hour RPO",
+      backupPlanName: "Dynamo4hourRPO",
     });
 
     // Backup Selection
